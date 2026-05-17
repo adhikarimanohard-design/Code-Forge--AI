@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:8080"; // → replace with Render URL
+const BASE_URL =
+"https://codecollab-backend-0s55.onrender.com/" ; // → replace with Render URL
 
 // ============================================
 // CUSTOM CURSOR
