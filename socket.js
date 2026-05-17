@@ -3,21 +3,25 @@ let currentRoom = null;
 const myId = "user_" + Math.random().toString(36).substr(2, 6);
 
 // ============================================
-// JOIN ROOM
+// JOIN ROOM — requires auth
 // ============================================
 function joinRoom() {
-  const roomId = document.getElementById('roomInput').value.trim();
-  if (!roomId) { showToast('Enter a room ID', 'error'); return; }
-  connectToRoom(roomId);
+  requireAuth(() => {
+    const roomId = document.getElementById('roomInput').value.trim();
+    if (!roomId) { showToast('Enter a room ID', 'error'); return; }
+    connectToRoom(roomId);
+  });
 }
 
 // ============================================
-// GENERATE NEW ROOM
+// GENERATE NEW ROOM — requires auth
 // ============================================
 function generateRoom() {
-  const roomId = Math.random().toString(36).substr(2, 8);
-  document.getElementById('roomInput').value = roomId;
-  connectToRoom(roomId);
+  requireAuth(() => {
+    const roomId = Math.random().toString(36).substr(2, 8);
+    document.getElementById('roomInput').value = roomId;
+    connectToRoom(roomId);
+  });
 }
 
 // ============================================
@@ -36,7 +40,6 @@ function connectToRoom(roomId) {
     setStatus('connected');
     showToast(`Joined room: ${roomId}`, 'success');
 
-    // Update room info panel
     document.getElementById('currentRoomDisplay').textContent = roomId;
     updateFileTab();
 
@@ -107,8 +110,8 @@ function sendCodeUpdate(code) {
 // UPDATE USER LIST
 // ============================================
 function updateUserList(users) {
-  const list  = document.getElementById('userList');
-  const count = document.getElementById('userCount');
+  const list   = document.getElementById('userList');
+  const count  = document.getElementById('userCount');
   const pcount = document.getElementById('participantCount');
 
   list.innerHTML = users.map(u =>
@@ -165,11 +168,11 @@ function updateFileTab() {
   const lang = document.getElementById('langSelect').value;
   const extensions = {
     javascript: 'main.js',
-    java: 'Main.java',
-    python: 'main.py',
-    cpp: 'main.cpp',
+    java:       'Main.java',
+    python:     'main.py',
+    cpp:        'main.cpp',
     typescript: 'main.ts',
-    rust: 'main.rs'
+    rust:       'main.rs'
   };
   document.getElementById('fileTabName').textContent = extensions[lang] || 'main.js';
 }
