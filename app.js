@@ -1,5 +1,4 @@
-const BASE_URL =
-"https://codecollab-backend-0s55.onrender.com/" ; // → replace with Render URL
+const BASE_URL = "https://codecollab-backend-0s55.onrender.com";
 
 // ============================================
 // CUSTOM CURSOR
@@ -25,13 +24,46 @@ function animateTrail() {
 animateTrail();
 
 // ============================================
-// ON LOAD — check session
+// ON LOAD — skip auth, go straight to app
 // ============================================
 window.onload = () => {
   const token = localStorage.getItem("cc_token");
   const name  = localStorage.getItem("cc_name");
-  if (token && name) showApp(name);
+
+  // Always show app first
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('appScreen').style.display  = 'flex';
+
+  if (token && name) {
+    updateUserDisplay(name);
+  } else {
+    updateUserDisplay('Guest');
+  }
 };
+
+// ============================================
+// REQUIRE AUTH BEFORE ACTION
+// ============================================
+function requireAuth(callback) {
+  const token = localStorage.getItem("cc_token");
+  if (token) {
+    callback();
+  } else {
+    showAuthModal();
+    window._pendingAction = callback;
+  }
+}
+
+// ============================================
+// AUTH MODAL
+// ============================================
+function showAuthModal() {
+  document.getElementById('authModal').style.display = 'flex';
+}
+
+function hideAuthModal() {
+  document.getElementById('authModal').style.display = 'none';
+}
 
 // ============================================
 // TAB SWITCH
@@ -70,8 +102,14 @@ async function register() {
 
     localStorage.setItem('cc_token', data.token);
     localStorage.setItem('cc_name',  data.name);
+    updateUserDisplay(data.name);
+    hideAuthModal();
     showToast('Account created!', 'success');
-    showApp(data.name);
+
+    if (window._pendingAction) {
+      window._pendingAction();
+      window._pendingAction = null;
+    }
 
   } catch (e) {
     errEl.textContent = "Server error. Try again.";
@@ -102,8 +140,14 @@ async function login() {
 
     localStorage.setItem('cc_token', data.token);
     localStorage.setItem('cc_name',  data.name);
+    updateUserDisplay(data.name);
+    hideAuthModal();
     showToast('Welcome back, ' + data.name + '!', 'success');
-    showApp(data.name);
+
+    if (window._pendingAction) {
+      window._pendingAction();
+      window._pendingAction = null;
+    }
 
   } catch (e) {
     errEl.textContent = "Server error. Try again.";
@@ -111,16 +155,11 @@ async function login() {
 }
 
 // ============================================
-// SHOW APP
+// UPDATE USER DISPLAY
 // ============================================
-function showApp(name) {
-  document.getElementById('authScreen').style.display = 'none';
-  document.getElementById('appScreen').style.display  = 'flex';
-
-  const display = document.getElementById('loggedInUser');
-  const avatar  = document.getElementById('userAvatar');
-  display.textContent = name;
-  avatar.textContent  = name.charAt(0).toUpperCase();
+function updateUserDisplay(name) {
+  document.getElementById('loggedInUser').textContent = name;
+  document.getElementById('userAvatar').textContent   = name.charAt(0).toUpperCase();
 }
 
 // ============================================
@@ -129,8 +168,8 @@ function showApp(name) {
 function logout() {
   localStorage.removeItem('cc_token');
   localStorage.removeItem('cc_name');
+  updateUserDisplay('Guest');
   showToast('Logged out', 'success');
-  setTimeout(() => location.reload(), 800);
 }
 
 // ============================================
@@ -196,14 +235,5 @@ function clearCode() {
 document.addEventListener('keydown', (e) => {
   if (e.ctrlKey && e.key === 'Enter') runCode();
   if (e.ctrlKey && e.shiftKey && e.key === 'E') explainCode();
-});
-
-// Enter key on auth inputs
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    const loginForm    = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    if (loginForm    && loginForm.style.display !== 'none')    login();
-    if (registerForm && registerForm.style.display !== 'none') register();
-  }
+  if (e.key === 'Escape') hideAuthModal();
 });
