@@ -17,7 +17,7 @@ public class AiService {
 
     private static final String GEMINI_URL =
         "https://generativelanguage.googleapis.com/v1beta/models/" +
-        "gemini-1.5-flash:generateContent?key=";
+        "gemini-2.0-flash:generateContent?key=";
 
     public String explain(String code) {
         return callGemini("Explain this code clearly and concisely:\n\n" + code);
