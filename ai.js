@@ -69,9 +69,10 @@ async function debugCode() {
 }
 
 // ============================================
-// RUN CODE (Piston API — no backend needed)
+// RUN CODE (Judge0 API)
 // ============================================
 async function runCode() {
+
   const code   = editor ? editor.getValue() : '';
   const lang   = document.getElementById('langSelect').value;
   const output = document.getElementById('codeOutput');
@@ -83,39 +84,50 @@ async function runCode() {
 
   output.textContent = '~ running...';
 
+  // Judge0 language IDs
   const langMap = {
-    javascript: { language: 'javascript', version: '18.15.0' },
-    java:       { language: 'java',       version: '15.0.2'  },
-    python:     { language: 'python',     version: '3.10.0'  },
-    cpp:        { language: 'c++',        version: '10.2.0'  },
-    typescript: { language: 'typescript', version: '5.0.3'   },
-    rust:       { language: 'rust',       version: '1.68.2'  },
+    javascript: 63,
+    typescript: 74,
+    python: 71,
+    java: 62,
+    cpp: 54,
+    rust: 73
   };
 
-  const config = langMap[lang] || { language: lang, version: '*' };
+  const language_id = langMap[lang];
 
   try {
-    const res  = await fetch('https://emkc.org/api/v2/piston/execute', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        language: config.language,
-        version:  config.version,
-        files: [{ content: code }]
-      })
-    });
+
+    const res = await fetch(
+      'https://ce.judge0.com/submissions?base64_encoded=false&wait=true',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          language_id: language_id,
+          source_code: code
+        })
+      }
+    );
 
     const data = await res.json();
 
-    if (data.run) {
-      const out = data.run.stdout || data.run.stderr || '(no output)';
-      output.textContent = '~ ' + out;
-      addActivity('Code executed');
-    } else {
-      output.textContent = '~ Error: ' + JSON.stringify(data);
-    }
+    const result =
+      data.stdout ||
+      data.stderr ||
+      data.compile_output ||
+      data.message ||
+      'No output';
+
+    output.textContent = '~ ' + result;
+
+    addActivity('Code executed');
 
   } catch (e) {
+
     output.textContent = '~ Error: ' + e.message;
+
   }
 }
