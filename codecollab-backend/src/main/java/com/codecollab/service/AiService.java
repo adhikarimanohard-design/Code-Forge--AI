@@ -10,26 +10,26 @@ import java.util.*;
 @Service
 public class AiService {
 
-    @Value("${openai.api.key}")
+    @Value("${gemini.api.key}")
     private String apiKey;
 
     private final RestTemplate restTemplate = new RestTemplate();
 
     public String explain(String code) {
-        return callOpenAI("Explain this code clearly and concisely:\n\n" + code);
+        return callGemini("Explain this code clearly and concisely:\n\n" + code);
     }
 
     public String debug(String code) {
-        return callOpenAI("Find bugs and suggest fixes for this code:\n\n" + code);
+        return callGemini("Find bugs and suggest fixes for this code:\n\n" + code);
     }
 
-    private String callOpenAI(String prompt) {
+    private String callGemini(String prompt) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(apiKey);
 
         Map<String, Object> body = new HashMap<>();
-        body.put("model", "gpt-3.5-turbo");
+        body.put("model", "gemini 3.1 pro");
         body.put("messages", List.of(
             Map.of("role", "user", "content", prompt)
         ));
