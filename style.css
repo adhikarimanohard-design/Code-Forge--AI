@@ -1148,3 +1148,109 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
   border-color: var(--red);
   color: var(--red);
 }
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+
+  /* Hide custom cursor on mobile */
+  .cursor, .cursor-trail { display: none; }
+  body { cursor: auto; }
+  button, input, select { cursor: auto; }
+
+  /* Topbar */
+  .topbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .topbar-left { flex: 1; min-width: 0; }
+  .topbar-center { order: 3; width: 100%; }
+  .topbar-right { gap: 6px; }
+
+  .app-name { display: none; }
+
+  .room-bar {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  #roomInput { width: 100%; flex: 1; }
+
+  /* Layout — stack vertically */
+  .app-layout {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  /* Hide left sidebar on mobile */
+  .sidebar-left { display: none; }
+
+  /* Editor takes full width */
+  .editor-main {
+    height: 50vh;
+    min-height: 300px;
+  }
+
+  /* Right sidebar becomes bottom panel */
+  .sidebar-right {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: auto;
+  }
+
+  .panel {
+    min-width: 280px;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  /* Status bar */
+  .editor-statusbar {
+    font-size: 9px;
+    gap: 8px;
+    padding: 0 8px;
+  }
+
+  /* Auth modal */
+  .modal-box {
+    width: 95vw;
+    max-width: 400px;
+  }
+
+  /* User pill */
+  #loggedInUser { max-width: 60px; font-size: 11px; }
+
+  /* Lang select */
+  .lang-select { font-size: 10px; padding: 4px 6px; }
+
+  /* Topbar right */
+  .topbar-right { flex: 0; }
+}
+
+@media (max-width: 480px) {
+  .editor-main { height: 45vh; }
+
+  .editor-actions { display: none; }
+
+  .topbar { padding: 6px 10px; }
+
+  .room-btn { padding: 5px 8px; font-size: 10px; }
+
+  .sidebar-right {
+    flex-direction: column;
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .panel { min-width: unset; width: 100%; }
+}
