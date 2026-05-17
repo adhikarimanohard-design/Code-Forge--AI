@@ -5,7 +5,8 @@ A deployed, dynamic full-stack collaborative coding platform built as an advance
 ---
 
 ## 🖇 LIVE URL
-YOUR_LIVE_URL_HERE
+
+https://adhikarimanohard-design.github.io/CodeCollab/
 
 ---
 
@@ -195,12 +196,8 @@ This project helped in understanding:
 
 # 👨‍💻 Author
 
-## Manohar Dash
+## Adhikari Manohar Dash
 
-4th Year B.Tech CSE Student
+B.Tech CSE Student
 
 ---
-
-# ⭐ If you like this project
-
-Give it a star on GitHub ⭐
