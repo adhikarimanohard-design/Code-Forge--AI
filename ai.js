@@ -2,6 +2,9 @@
 // AI EXPLAIN
 // ============================================
 async function explainCode() {
+  const token = localStorage.getItem('cc_token');
+  if (!token) { showAuthModal(); return; }
+
   const code   = editor ? editor.getValue() : '';
   const output = document.getElementById('aiOutput');
 
@@ -34,6 +37,9 @@ async function explainCode() {
 // AI DEBUG
 // ============================================
 async function debugCode() {
+  const token = localStorage.getItem('cc_token');
+  if (!token) { showAuthModal(); return; }
+
   const code   = editor ? editor.getValue() : '';
   const output = document.getElementById('aiOutput');
 
@@ -77,7 +83,6 @@ async function runCode() {
 
   output.textContent = '~ running...';
 
-  // Language version map for Piston
   const langMap = {
     javascript: { language: 'javascript', version: '18.15.0' },
     java:       { language: 'java',       version: '15.0.2'  },
