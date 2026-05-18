@@ -30,7 +30,6 @@ function generateRoom() {
 function connectToRoom(roomId) {
   if (stompClient) stompClient.deactivate();
   currentRoom = roomId;
-
   setStatus('connecting');
 
   const socket = new SockJS(`${BASE_URL}/ws`);
@@ -41,20 +40,8 @@ function connectToRoom(roomId) {
     showToast(`Joined room: ${roomId}`, 'success');
 
     document.getElementById('currentRoomDisplay').textContent = roomId;
+    document.getElementById('roomInput').value = roomId;
     updateFileTab();
-
-    // Fetch existing room code
-    fetch(`${BASE_URL}/api/room/${roomId}`, { headers: authHeaders() })
-      .then(r => r.json())
-      .then(room => {
-        if (room.currentCode && editor) {
-          editor.setValue(room.currentCode);
-        }
-        if (room.language) {
-          document.getElementById('langSelect').value = room.language;
-          changeLanguage();
-        }
-      }).catch(() => {});
 
     // Subscribe — code updates
     stompClient.subscribe(`/topic/room/${roomId}/code`, (msg) => {
@@ -72,11 +59,30 @@ function connectToRoom(roomId) {
       updateUserList(JSON.parse(msg.body));
     });
 
+    // Subscribe — chat
+    stompClient.subscribe(`/topic/room/${roomId}/chat`, (msg) => {
+      const data = JSON.parse(msg.body);
+      appendChatMessage(data);
+    });
+
     // Announce join
     stompClient.publish({
       destination: `/app/room/${roomId}/join`,
       body: JSON.stringify({ userId: myId })
     });
+
+    // Fetch existing room state
+    fetch(`${BASE_URL}/api/room/${roomId}`, { headers: authHeaders() })
+      .then(r => r.json())
+      .then(room => {
+        if (room.currentCode && editor) {
+          editor.setValue(room.currentCode);
+        }
+        if (room.language) {
+          document.getElementById('langSelect').value = room.language;
+          changeLanguage();
+        }
+      }).catch(() => {});
 
     addActivity(`You joined room ${roomId}`);
   };
@@ -104,6 +110,41 @@ function sendCodeUpdate(code) {
     body: JSON.stringify({ code, userId: myId })
   });
   document.getElementById('syncIndicator').textContent = '● Synced';
+}
+
+// ============================================
+// SEND CHAT MESSAGE
+// ============================================
+function sendChatMessage() {
+  const input = document.getElementById('chatInput');
+  const msg   = input.value.trim();
+  if (!msg || !currentRoom || !stompClient) return;
+
+  const name = localStorage.getItem('cc_name') || myId;
+
+  stompClient.publish({
+    destination: `/app/room/${currentRoom}/chat`,
+    body: JSON.stringify({ userId: myId, name, message: msg })
+  });
+
+  input.value = '';
+}
+
+// ============================================
+// APPEND CHAT MESSAGE
+// ============================================
+function appendChatMessage(data) {
+  const box  = document.getElementById('chatMessages');
+  const isMe = data.userId === myId;
+
+  const div = document.createElement('div');
+  div.className = `chat-msg ${isMe ? 'chat-me' : 'chat-them'}`;
+  div.innerHTML = `
+    <span class="chat-name">${isMe ? 'You' : data.name}</span>
+    <span class="chat-text">${data.message}</span>
+  `;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
 }
 
 // ============================================
