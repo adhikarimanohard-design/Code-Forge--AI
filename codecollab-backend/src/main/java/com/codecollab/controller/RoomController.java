@@ -44,3 +44,12 @@ public class RoomController {
             room.getParticipants());
     }
 }
+
+@MessageMapping("/room/{roomId}/chat")
+    public void handleChat(@DestinationVariable String roomId,
+                           @Payload Map<String, String> payload) {
+        messagingTemplate.convertAndSend(
+            "/topic/room/" + roomId + "/chat", payload);
+    }
+
+}
