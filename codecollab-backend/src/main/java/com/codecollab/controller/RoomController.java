@@ -43,7 +43,6 @@ public class RoomController {
             "/topic/room/" + roomId + "/users",
             room.getParticipants());
     }
-}
 
 @MessageMapping("/room/{roomId}/chat")
     public void handleChat(@DestinationVariable String roomId,
