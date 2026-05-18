@@ -1275,23 +1275,6 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
   transform: translateY(-1px);
 }
 
-.sidebar-left {
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-chat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border-bottom: none !important;
-}
-
-.sidebar-chat .chat-messages {
-  flex: 1;
-  max-height: 180px;
-}
-
 /* ============================================
    MOBILE RESPONSIVE — FINAL
    ============================================ */
@@ -1345,30 +1328,24 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
     width: 100% !important;
   }
 
+  /* RIGHT SIDEBAR — horizontal scroll */
   .sidebar-right {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: row !important;
     width: 100% !important;
     height: auto !important;
     border-left: none !important;
     border-top: 1px solid var(--border) !important;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     order: 3 !important;
   }
 
-  .sidebar-right .sidebar-section {
-    width: 100% !important;
-    min-width: unset !important;
-    border-right: none !important;
-    border-bottom: 1px solid var(--border) !important;
-  }
-
-  .sidebar-chat {
-    width: 100% !important;
-    min-width: unset !important;
-    display: flex !important;
-    flex-direction: column !important;
+  .sidebar-right .panel {
+    min-width: 220px !important;
+    flex-shrink: 0 !important;
+    border-bottom: none !important;
+    border-right: 1px solid var(--border) !important;
   }
 
   .chat-messages { max-height: 150px !important; }
@@ -1380,4 +1357,20 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+}
+.sidebar-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-bottom: none !important;
+}
+
+.sidebar-chat .chat-messages {
+  flex: 1;
+  max-height: 180px;
 }
