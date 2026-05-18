@@ -25,13 +25,24 @@ function generateRoom() {
 }
 
 // ============================================
-// CONNECT TO ROOM
+// CONNECT TO ROOM — wakes Render first
 // ============================================
 function connectToRoom(roomId) {
   if (stompClient) stompClient.deactivate();
   currentRoom = roomId;
   setStatus('connecting');
+  showToast('Waking server...', 'success');
 
+  // Wake up Render first then connect WebSocket
+  fetch(`${BASE_URL}/health`)
+    .then(() => startWebSocket(roomId))
+    .catch(() => startWebSocket(roomId));
+}
+
+// ============================================
+// START WEBSOCKET
+// ============================================
+function startWebSocket(roomId) {
   const socket = new SockJS(`${BASE_URL}/ws`);
 
   stompClient = new StompJs.Client({
@@ -39,6 +50,7 @@ function connectToRoom(roomId) {
     reconnectDelay: 5000,
     heartbeatIncoming: 10000,
     heartbeatOutgoing: 10000,
+
     onConnect: () => {
       setStatus('connected');
       showToast(`Joined room: ${roomId}`, 'success');
