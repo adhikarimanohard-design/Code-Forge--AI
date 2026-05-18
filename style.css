@@ -1374,3 +1374,27 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
   flex: 1;
   max-height: 180px;
 }
+
+/* Force right sidebar visible on mobile */
+@media (max-width: 768px) {
+  .sidebar-right {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 150px !important;
+    border-left: none !important;
+    border-top: 1px solid var(--border) !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    order: 3 !important;
+  }
+
+  .sidebar-right .panel {
+    min-width: 220px !important;
+    flex-shrink: 0 !important;
+    border-bottom: none !important;
+    border-right: 1px solid var(--border) !important;
+    display: block !important;
+  }
+}
