@@ -162,17 +162,6 @@ This project helped in understanding:
 
 ---
 
-# 🚀 Future Enhancements
-
-- GitHub integration
-- Cloud file storage system
-- Docker-based sandbox execution
-- AI autocomplete engine
-- Multi-tab project workspace
-- Advanced debugging tools
-
----
-
 # 👨‍💻 Author
 
 **Adhikari Manohar Dash**  
