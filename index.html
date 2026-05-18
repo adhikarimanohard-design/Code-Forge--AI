@@ -64,67 +64,8 @@
     <!-- MAIN LAYOUT -->
     <div class="app-layout">
 
-      <!-- SIDEBAR LEFT -->
+      <!-- SIDEBAR LEFT — AI, Terminal, Room Info -->
       <aside class="sidebar-left">
-
-        <!-- Online Users -->
-        <div class="sidebar-section">
-          <div class="section-header">
-            <span class="section-title">ONLINE</span>
-            <span class="user-count" id="userCount">0</span>
-          </div>
-          <ul id="userList" class="user-list"></ul>
-        </div>
-
-        <!-- Activity -->
-        <div class="sidebar-section">
-          <div class="section-header">
-            <span class="section-title">ACTIVITY</span>
-          </div>
-          <div id="activityLog" class="activity-log"></div>
-        </div>
-
-        <!-- Chat -->
-        <div class="sidebar-section sidebar-chat">
-          <div class="section-header">
-            <span class="section-title">💬 CHAT</span>
-          </div>
-          <div id="chatMessages" class="chat-messages"></div>
-          <div class="chat-input-bar">
-            <input
-              id="chatInput"
-              placeholder="Message..."
-              onkeydown="if(event.key==='Enter') sendChatMessage()"
-            />
-            <button class="chat-send-btn" onclick="sendChatMessage()">→</button>
-          </div>
-        </div>
-
-      </aside>
-
-      <!-- EDITOR CENTER -->
-      <main class="editor-main">
-        <div class="editor-topbar">
-          <div class="file-tab active">
-            <span class="file-icon">◈</span>
-            <span id="fileTabName">main.js</span>
-          </div>
-          <div class="editor-actions">
-            <button class="action-btn" onclick="copyCode()">⎘ Copy</button>
-            <button class="action-btn" onclick="clearCode()">⌫ Clear</button>
-          </div>
-        </div>
-        <div id="editor-container"></div>
-        <div class="editor-statusbar">
-          <span id="cursorPos">Ln 1, Col 1</span>
-          <span id="langBadge">JavaScript</span>
-          <span id="charCount">0 chars</span>
-          <span class="sync-indicator" id="syncIndicator">● Synced</span>
-        </div>
-      </main>
-
-      <!-- SIDEBAR RIGHT -->
-      <aside class="sidebar-right">
 
         <!-- AI Panel -->
         <div class="panel" id="aiPanel">
@@ -187,6 +128,65 @@
               <span class="info-value" id="participantCount">0</span>
             </div>
             <button class="copy-room-btn" onclick="copyRoomId()">⎘ Copy Room ID</button>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- EDITOR CENTER -->
+      <main class="editor-main">
+        <div class="editor-topbar">
+          <div class="file-tab active">
+            <span class="file-icon">◈</span>
+            <span id="fileTabName">main.js</span>
+          </div>
+          <div class="editor-actions">
+            <button class="action-btn" onclick="copyCode()">⎘ Copy</button>
+            <button class="action-btn" onclick="clearCode()">⌫ Clear</button>
+          </div>
+        </div>
+        <div id="editor-container"></div>
+        <div class="editor-statusbar">
+          <span id="cursorPos">Ln 1, Col 1</span>
+          <span id="langBadge">JavaScript</span>
+          <span id="charCount">0 chars</span>
+          <span class="sync-indicator" id="syncIndicator">● Synced</span>
+        </div>
+      </main>
+
+      <!-- SIDEBAR RIGHT — Online, Activity, Chat -->
+      <aside class="sidebar-right">
+
+        <!-- Online Users -->
+        <div class="sidebar-section">
+          <div class="section-header">
+            <span class="section-title">ONLINE</span>
+            <span class="user-count" id="userCount">0</span>
+          </div>
+          <ul id="userList" class="user-list"></ul>
+        </div>
+
+        <!-- Activity -->
+        <div class="sidebar-section">
+          <div class="section-header">
+            <span class="section-title">ACTIVITY</span>
+          </div>
+          <div id="activityLog" class="activity-log"></div>
+        </div>
+
+        <!-- Chat -->
+        <div class="sidebar-section sidebar-chat">
+          <div class="section-header">
+            <span class="section-title">💬 CHAT</span>
+          </div>
+          <div id="chatMessages" class="chat-messages"></div>
+          <div class="chat-input-bar">
+            <input
+              id="chatInput"
+              placeholder="Message..."
+              onkeydown="if(event.key==='Enter') sendChatMessage()"
+            />
+            <button class="chat-send-btn" onclick="sendChatMessage()">→</button>
           </div>
         </div>
 
