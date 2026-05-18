@@ -1149,94 +1149,6 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
   color: var(--red);
 }
 
-/* ============================================
-   MOBILE RESPONSIVE
-   ============================================ */
-@media (max-width: 768px) {
-
-  .cursor, .cursor-trail { display: none; }
-  body { cursor: auto; }
-  button, input, select { cursor: auto; }
-
-  .topbar {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 8px 12px;
-    gap: 8px;
-  }
-
-  .topbar-left { flex: 1; min-width: 0; }
-  .topbar-center { order: 3; width: 100%; }
-  .topbar-right { gap: 6px; }
-  .app-name { display: none; }
-
-  .room-bar { width: 100%; justify-content: space-between; }
-  #roomInput { width: 100%; flex: 1; }
-
-  /* Stack layout vertically on mobile */
-  .app-layout { flex-direction: column; overflow-y: auto; }
-
-  /* Editor full width, fixed height */
-  .editor-main { height: 55vh; min-height: 300px; }
-
-  /* Left sidebar — horizontal scroll on mobile */
-  .sidebar-left {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    height: auto;
-    order: 2;
-  }
-
-  .sidebar-left .panel {
-    min-width: 260px;
-    border-bottom: none;
-    border-right: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  /* Right sidebar — hidden on mobile, show as bottom bar */
-  .sidebar-right {
-    width: 100%;
-    border-left: none;
-    border-top: 1px solid var(--border);
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    height: auto;
-    order: 3;
-  }
-
-  .sidebar-right .sidebar-section {
-    min-width: 200px;
-    border-bottom: none;
-    border-right: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  .sidebar-chat {
-    min-width: 260px !important;
-  }
-
-  .editor-statusbar { font-size: 9px; gap: 8px; padding: 0 8px; }
-  .modal-box { width: 95vw; max-width: 400px; }
-  #loggedInUser { max-width: 60px; font-size: 11px; }
-  .lang-select { font-size: 10px; padding: 4px 6px; }
-  .topbar-right { flex: 0; }
-  .editor-actions { display: none; }
-  .room-btn { padding: 5px 8px; font-size: 10px; }
-}
-
-/* Right sidebar needs flex column for proper layout */
-.sidebar-right {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-
 .footer {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -1378,4 +1290,92 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
 .sidebar-chat .chat-messages {
   flex: 1;
   max-height: 180px;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+
+  .cursor, .cursor-trail { display: none; }
+  body { cursor: auto; }
+  button, input, select { cursor: auto; }
+
+  .topbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .topbar-left { flex: 1; min-width: 0; }
+  .topbar-center { order: 3; width: 100%; }
+  .topbar-right { gap: 6px; }
+  .app-name { display: none; }
+
+  .room-bar { width: 100%; justify-content: space-between; }
+  #roomInput { width: 100%; flex: 1; }
+
+  /* Stack layout vertically on mobile */
+  .app-layout { flex-direction: column; overflow-y: auto; }
+
+  /* Editor full width, fixed height */
+  .editor-main { height: 55vh; min-height: 300px; }
+
+  /* Left sidebar — horizontal scroll on mobile */
+  .sidebar-left {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: auto;
+    order: 2;
+  }
+
+  .sidebar-left .panel {
+    min-width: 260px;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  /* Right sidebar — hidden on mobile, show as bottom bar */
+  .sidebar-right {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: auto;
+    order: 3;
+  }
+
+  .sidebar-right .sidebar-section {
+    min-width: 200px;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .sidebar-chat {
+    min-width: 260px !important;
+  }
+
+  .editor-statusbar { font-size: 9px; gap: 8px; padding: 0 8px; }
+  .modal-box { width: 95vw; max-width: 400px; }
+  #loggedInUser { max-width: 60px; font-size: 11px; }
+  .lang-select { font-size: 10px; padding: 4px 6px; }
+  .topbar-right { flex: 0; }
+  .editor-actions { display: none; }
+  .room-btn { padding: 5px 8px; font-size: 10px; }
+}
+
+/* Right sidebar needs flex column for proper layout */
+.sidebar-right {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
