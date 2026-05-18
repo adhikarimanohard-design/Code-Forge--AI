@@ -1,6 +1,9 @@
-# 🚀 CodeCollab – Real-Time AI Collaborative Coding Platform
 
-A deployed, dynamic full-stack collaborative coding platform built as an advanced placement project. CodeCollab enables developers to code together in real time with AI-powered debugging, explanation, and live code execution.
+# 🚀 CodeCollab AI – Smart AI-Powered Cloud IDE
+
+A deployed full-stack AI-powered online IDE that allows developers to write, execute, and manage code in real time with AI assistance, authentication, and activity tracking.
+
+This project is built as a production-style developer tool demonstrating full-stack engineering, backend architecture, and AI integration.
 
 ---
 
@@ -12,35 +15,31 @@ https://adhikarimanohard-design.github.io/CodeCollab/
 
 # 📌 Project Overview
 
-CodeCollab is designed to simulate a modern collaborative developer environment similar to online coding interview and pair-programming platforms.
+CodeCollab AI is a modern cloud-based IDE designed to enhance developer productivity by combining:
 
-The platform combines:
-- Real-time collaboration
-- AI-assisted coding
-- Online code execution
-- Authentication system
-- Modern developer UI
+- Online code editor
+- Multi-language code execution
+- AI-powered coding assistant
+- Secure authentication system
+- Activity tracking system
 
-The project demonstrates practical software engineering skills expected in product-based company placements.
+It simulates a lightweight version of modern developer tools like cloud IDEs with AI integration.
 
 ---
 
 # 🌐 Live Deployment
 
 ### Frontend
-Deployed interactive frontend with real-time collaboration support.
+Fully responsive web-based IDE interface deployed and accessible online.
 
 ### Backend
-Spring Boot REST API + WebSocket server deployed on cloud infrastructure.
-
-> ✔️ Frontend and backend are fully connected and working
+Spring Boot REST API backend handling authentication, AI requests, and code execution.
 
 ---
 
 # 🛠️ Tech Stack
 
 ## 👨‍💻 FRONTEND
-
 - HTML5
 - CSS3
 - Vanilla JavaScript
@@ -49,30 +48,26 @@ Spring Boot REST API + WebSocket server deployed on cloud infrastructure.
 ---
 
 ## 👨‍💻 BACKEND
-
 - Java 17
 - Spring Boot
-- Spring WebSocket
+- Spring Security (JWT Authentication)
 - RESTful APIs
 
 ---
 
-## 👨‍💻 DATABASE
+## 👨‍💻 AI INTEGRATION
+- GROQ / LLM API for AI assistant features
 
+---
+
+## 👨‍💻 DATABASE
 - MongoDB
 
 ---
 
-## 👨‍💻 AI INTEGRATION
-
-- GROQ API
-
----
-
 ## 👨‍💻 DEPLOYMENT & TOOLS
-
 - Render (Backend Deployment)
-- GitHub Pages / Hosting
+- GitHub Pages (Frontend Hosting)
 - Maven
 - Git & GitHub
 
@@ -80,88 +75,75 @@ Spring Boot REST API + WebSocket server deployed on cloud infrastructure.
 
 # ✨ Features
 
-## 👥 Real-Time Collaboration
-
-- Multi-user coding rooms
-- Live synchronized code editing
-- Dynamic room joining system
-- Shared coding workspace
+## 💻 Online Code Editor
+- Monaco Editor integration
+- Multi-language support
+- Syntax highlighting and clean UI
 
 ---
 
-## 🤖 AI-Powered Features
-
-### AI Code Explanation
-- Explains selected code snippets
-- Helps understand complex logic
-
-### AI Debugging Assistant
-- Detects possible issues
-- Suggests fixes and improvements
+## ▶️ Code Execution Engine
+- Run code directly from browser
+- Backend-powered execution system
+- Instant output response display
 
 ---
 
-## 💻 Online Code Execution
-
-- Execute code directly inside platform
-- Interactive terminal-style output
-- Runtime output display
+## 🤖 AI Assistant
+- AI-powered coding help
+- Code explanation
+- Debugging suggestions
+- Interactive chat-based interface
 
 ---
 
 ## 🔐 Authentication System
-
-- User Sign Up & Login
-- Personalized sessions
-- User profile management
+- JWT-based login & signup
+- Secure API access
+- User session management
 
 ---
 
-## 🎨 Modern Developer UI
-
-- Monaco Editor integration
-- Responsive layout
-- Terminal-inspired interface
-- Clean developer experience
+## 📊 Activity Tracking
+- Tracks user actions (run code, AI usage, login)
+- Activity log system for user actions
+- Lightweight polling-based updates
 
 ---
 
 # 🧠 System Design Highlights
 
-## Real-Time Synchronization
-
-- WebSocket-based communication
-- Shared editor updates
-- Multi-user room management
-
----
-
 ## AI Workflow
-
-- User prompt submission
-- Backend API processing
-- GROQ AI integration
-- AI-generated debugging/explanation responses
+- User sends prompt
+- Backend processes request
+- LLM API generates response
+- Response returned to frontend
 
 ---
 
 ## Code Execution Pipeline
+- User writes code
+- Request sent to backend API
+- Execution engine runs code
+- Output returned and displayed
 
-- User submits code
-- Backend processes request
-- Execution engine returns output
-- Output displayed in terminal section
+---
+
+## Authentication Flow
+- User registers/logs in
+- JWT token generated
+- Token used for secured API requests
 
 ---
 
 # 📊 Key Functionalities
 
-- Create & Join Coding Rooms
-- Live Code Synchronization
-- AI Explain & Debug
-- Online Code Execution
-- Authentication & User Sessions
-- Responsive UI Experience
+- User Registration & Login
+- Secure JWT Authentication
+- Multi-language Code Editor
+- AI Coding Assistant
+- Code Execution System
+- Activity Monitoring Dashboard
 
 ---
 
@@ -169,35 +151,30 @@ Spring Boot REST API + WebSocket server deployed on cloud infrastructure.
 
 This project helped in understanding:
 
-- Full Stack Development
-- REST API Design
-- WebSocket Communication
-- Real-Time Systems
+- Full Stack Web Development
+- REST API Architecture
+- JWT Authentication
 - AI API Integration
-- Authentication Flow
-- Backend Architecture
-- Database Modeling
-- Deployment & Hosting
+- Backend System Design
+- Code Execution Workflows
+- Secure Application Development
+- Deployment on Cloud Platforms
 
 ---
 
 # 🚀 Future Enhancements
 
-- Collaborative live cursors
-- Multi-file workspace
-- Dockerized execution sandbox
 - GitHub integration
-- Code history/versioning
-- Team chat system
-- AI code optimization
-- Dark/light themes
+- Cloud file storage system
+- Docker-based sandbox execution
+- AI autocomplete engine
+- Multi-tab project workspace
+- Advanced debugging tools
 
 ---
 
 # 👨‍💻 Author
 
-## Adhikari Manohar Dash
-
-B.Tech CSE Student
-
----
+**Adhikari Manohar Dash**  
+B.Tech CSE Student  
+Full Stack & AI Enthusiast
