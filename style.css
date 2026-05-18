@@ -1379,3 +1379,10 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
   flex-direction: column;
   overflow-y: auto;
 }
+
+/* Force right sidebar visible */
+.sidebar-right {
+  display: flex !important;
+  flex-direction: column;
+  overflow-y: auto;
+}
