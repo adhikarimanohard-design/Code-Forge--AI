@@ -33,23 +33,27 @@ function connectToRoom(roomId) {
   setStatus('connecting');
   showToast('Waking server...', 'success');
 
-  // Wake up Render first then connect WebSocket
   fetch(`${BASE_URL}/health`)
-    .then(() => startWebSocket(roomId))
+    .then(() => {
+      showToast('Server ready! Connecting...', 'success');
+      setTimeout(() => startWebSocket(roomId), 1000);
+    })
     .catch(() => startWebSocket(roomId));
 }
 
 // ============================================
-// START WEBSOCKET
+// START WEBSOCKET — with polling fallback
 // ============================================
 function startWebSocket(roomId) {
-  const socket = new SockJS(`${BASE_URL}/ws`);
+  const socket = new SockJS(`${BASE_URL}/ws`, null, {
+    transports: ['websocket', 'xhr-streaming', 'xhr-polling']
+  });
 
   stompClient = new StompJs.Client({
     webSocketFactory: () => socket,
-    reconnectDelay: 5000,
-    heartbeatIncoming: 10000,
-    heartbeatOutgoing: 10000,
+    reconnectDelay: 3000,
+    heartbeatIncoming: 25000,
+    heartbeatOutgoing: 25000,
 
     onConnect: () => {
       setStatus('connected');
