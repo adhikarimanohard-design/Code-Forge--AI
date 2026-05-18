@@ -27,15 +27,29 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain chain)
             throws ServletException, IOException {
 
+        String path = req.getRequestURI();
+
+        // ✅ IMPORTANT: Skip WebSocket/SockJS endpoints
+        if (path.startsWith("/ws")) {
+            chain.doFilter(req, res);
+            return;
+        }
+
         String header = req.getHeader("Authorization");
 
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
+
             if (jwtUtil.isValid(token)) {
                 String email = jwtUtil.extractEmail(token);
+
                 userRepository.findByEmail(email).ifPresent(user -> {
                     var auth = new UsernamePasswordAuthenticationToken(
-                            user, null, List.of());
+                            user,
+                            null,
+                            List.of()
+                    );
+
                     SecurityContextHolder.getContext().setAuthentication(auth);
                 });
             }
