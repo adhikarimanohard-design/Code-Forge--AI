@@ -1277,3 +1277,106 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
 .footer a:hover {
   text-decoration: underline;
 }
+
+/* CHAT */
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  padding: 4px 0;
+}
+
+.chat-messages::-webkit-scrollbar { width: 3px; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--border2); }
+
+.chat-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 90%;
+}
+
+.chat-me {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.chat-them {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.chat-name {
+  font-size: 9px;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.chat-text {
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.chat-me .chat-text {
+  background: var(--accent);
+  color: var(--bg);
+  border-bottom-right-radius: 2px;
+}
+
+.chat-them .chat-text {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 2px;
+}
+
+.chat-input-bar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.chat-input-bar input {
+  flex: 1;
+  padding: 8px 10px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  outline: none;
+}
+
+.chat-input-bar input:focus {
+  border-color: rgba(127,255,178,0.4);
+}
+
+.chat-send-btn {
+  width: 32px; height: 32px;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: none;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chat-send-btn:hover {
+  box-shadow: var(--glow-sm);
+  transform: translateY(-1px);
+}
