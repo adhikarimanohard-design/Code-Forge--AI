@@ -33,69 +33,81 @@ function connectToRoom(roomId) {
   setStatus('connecting');
 
   const socket = new SockJS(`${BASE_URL}/ws`);
-  stompClient = new StompJs.Client({ webSocketFactory: () => socket });
 
-  stompClient.onConnect = () => {
-    setStatus('connected');
-    showToast(`Joined room: ${roomId}`, 'success');
+  stompClient = new StompJs.Client({
+    webSocketFactory: () => socket,
+    reconnectDelay: 5000,
+    heartbeatIncoming: 10000,
+    heartbeatOutgoing: 10000,
+    onConnect: () => {
+      setStatus('connected');
+      showToast(`Joined room: ${roomId}`, 'success');
 
-    document.getElementById('currentRoomDisplay').textContent = roomId;
-    document.getElementById('roomInput').value = roomId;
-    updateFileTab();
+      document.getElementById('currentRoomDisplay').textContent = roomId;
+      document.getElementById('roomInput').value = roomId;
+      updateFileTab();
 
-    // Subscribe — code updates
-    stompClient.subscribe(`/topic/room/${roomId}/code`, (msg) => {
-      const data = JSON.parse(msg.body);
-      if (data.userId !== myId && editor) {
-        const pos = editor.getPosition();
-        editor.setValue(data.code);
-        editor.setPosition(pos);
-        flashSync();
-      }
-    });
-
-    // Subscribe — user list
-    stompClient.subscribe(`/topic/room/${roomId}/users`, (msg) => {
-      updateUserList(JSON.parse(msg.body));
-    });
-
-    // Subscribe — chat
-    stompClient.subscribe(`/topic/room/${roomId}/chat`, (msg) => {
-      const data = JSON.parse(msg.body);
-      appendChatMessage(data);
-    });
-
-    // Announce join
-    stompClient.publish({
-      destination: `/app/room/${roomId}/join`,
-      body: JSON.stringify({ userId: myId })
-    });
-
-    // Fetch existing room state
-    fetch(`${BASE_URL}/api/room/${roomId}`, { headers: authHeaders() })
-      .then(r => r.json())
-      .then(room => {
-        if (room.currentCode && editor) {
-          editor.setValue(room.currentCode);
+      // Subscribe — code updates
+      stompClient.subscribe(`/topic/room/${roomId}/code`, (msg) => {
+        const data = JSON.parse(msg.body);
+        if (data.userId !== myId && editor) {
+          const pos = editor.getPosition();
+          editor.setValue(data.code);
+          editor.setPosition(pos);
+          flashSync();
         }
-        if (room.language) {
-          document.getElementById('langSelect').value = room.language;
-          changeLanguage();
-        }
-      }).catch(() => {});
+      });
 
-    addActivity(`You joined room ${roomId}`);
-  };
+      // Subscribe — user list
+      stompClient.subscribe(`/topic/room/${roomId}/users`, (msg) => {
+        updateUserList(JSON.parse(msg.body));
+      });
 
-  stompClient.onDisconnect = () => {
-    setStatus('disconnected');
-    addActivity('Disconnected from room');
-  };
+      // Subscribe — chat
+      stompClient.subscribe(`/topic/room/${roomId}/chat`, (msg) => {
+        const data = JSON.parse(msg.body);
+        appendChatMessage(data);
+      });
 
-  stompClient.onStompError = () => {
-    setStatus('disconnected');
-    showToast('Connection failed', 'error');
-  };
+      // Announce join
+      stompClient.publish({
+        destination: `/app/room/${roomId}/join`,
+        body: JSON.stringify({ userId: myId })
+      });
+
+      // Fetch existing room state
+      fetch(`${BASE_URL}/api/room/${roomId}`, { headers: authHeaders() })
+        .then(r => r.json())
+        .then(room => {
+          if (room.currentCode && editor) {
+            editor.setValue(room.currentCode);
+          }
+          if (room.language) {
+            document.getElementById('langSelect').value = room.language;
+            changeLanguage();
+          }
+        }).catch(() => {});
+
+      addActivity(`You joined room ${roomId}`);
+    },
+
+    onDisconnect: () => {
+      setStatus('disconnected');
+      addActivity('Disconnected — reconnecting...');
+    },
+
+    onStompError: (frame) => {
+      setStatus('disconnected');
+      showToast('Connection error — retrying...', 'error');
+      console.error('STOMP error:', frame);
+    },
+
+    onWebSocketError: (error) => {
+      setStatus('disconnected');
+      showToast('WebSocket error — retrying...', 'error');
+      console.error('WS error:', error);
+    }
+  });
 
   stompClient.activate();
 }
@@ -118,7 +130,11 @@ function sendCodeUpdate(code) {
 function sendChatMessage() {
   const input = document.getElementById('chatInput');
   const msg   = input.value.trim();
-  if (!msg || !currentRoom || !stompClient) return;
+  if (!msg) { showToast('Type a message first', 'error'); return; }
+  if (!currentRoom) { showToast('Join a room first', 'error'); return; }
+  if (!stompClient || !stompClient.connected) {
+    showToast('Not connected', 'error'); return;
+  }
 
   const name = localStorage.getItem('cc_name') || myId;
 
@@ -145,6 +161,7 @@ function appendChatMessage(data) {
   `;
   box.appendChild(div);
   box.scrollTop = box.scrollHeight;
+  addActivity(`${isMe ? 'You' : data.name}: ${data.message}`);
 }
 
 // ============================================
