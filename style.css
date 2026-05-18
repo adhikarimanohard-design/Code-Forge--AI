@@ -1293,10 +1293,11 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
 }
 
 /* ============================================
-   MOBILE RESPONSIVE
-   ============================================ */
+MOBILE RESPONSIVE
+============================================ */
 @media (max-width: 768px) {
 
+  /* Disable custom cursor on mobile */
   .cursor,
   .cursor-trail {
     display: none;
@@ -1309,14 +1310,21 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
 
   button,
   input,
-  select {
+  select,
+  textarea {
     cursor: auto;
   }
 
+  /* ============================================
+  TOPBAR
+  ============================================ */
   .topbar {
+    display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
     height: auto;
-    padding: 8px 12px;
+    padding: 10px 12px;
     gap: 8px;
   }
 
@@ -1331,54 +1339,171 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
   }
 
   .topbar-right {
+    display: flex;
     gap: 6px;
+    align-items: center;
   }
 
   .app-name {
     display: none;
   }
 
+  /* ============================================
+  ROOM BAR
+  ============================================ */
   .room-bar {
+    display: flex;
     width: 100%;
+    gap: 8px;
     justify-content: space-between;
   }
 
   #roomInput {
-    width: 100%;
     flex: 1;
+    width: 100%;
+    min-width: 0;
   }
 
-  /* MAIN LAYOUT */
+  /* ============================================
+  MAIN LAYOUT
+  ============================================ */
   .app-layout {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 70px);
-    overflow: hidden;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
-  /* EDITOR */
+  /* ============================================
+  EDITOR SECTION
+  ============================================ */
   .editor-section {
     width: 100%;
-    height: 55vh;
-    min-height: 300px;
-  }
-
-  /* CHAT */
-  .chat-section {
-    width: 100%;
-    height: 45vh;
+    height: auto !important;
+    min-height: 500px;
     display: flex;
     flex-direction: column;
-    border-left: none;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    overflow: visible;
+  }
+
+  .editor-container {
+    width: 100%;
+    height: 400px;
+    min-height: 400px;
+  }
+
+  #editor {
+    height: 100% !important;
+  }
+
+  /* ============================================
+  RIGHT SIDEBAR
+  ============================================ */
+  .right-sidebar {
+    width: 100%;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    gap: 14px;
+    padding: 12px;
+  }
+
+  /* ============================================
+  CHAT PANEL
+  ============================================ */
+  .chat-panel {
+    width: 100%;
+    height: auto !important;
+    min-height: 300px;
+    display: flex !important;
+    flex-direction: column;
+    overflow: visible;
   }
 
   .chat-messages {
-    flex: 1;
+    height: 250px;
     overflow-y: auto;
   }
 
-  .chat-input-area {
-    padding: 10px;
+  .chat-input-container {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .chat-input-container input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* ============================================
+  AI PANEL
+  ============================================ */
+  .ai-panel {
+    width: 100%;
+    height: auto !important;
+    min-height: 250px;
+  }
+
+  /* ============================================
+  TERMINAL
+  ============================================ */
+  .terminal-panel {
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+  }
+
+  .terminal-output {
+    height: 200px;
+    overflow-y: auto;
+  }
+
+  /* ============================================
+  ACTIVITY PANEL
+  ============================================ */
+  .activity-panel {
+    width: 100%;
+    height: auto !important;
+    min-height: 200px;
+    overflow: visible;
+  }
+
+  /* ============================================
+  ONLINE USERS
+  ============================================ */
+  .online-users {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  /* ============================================
+  BUTTONS
+  ============================================ */
+  button {
+    min-height: 42px;
+  }
+
+  /* ============================================
+  FIX HIDDEN CONTENT
+  ============================================ */
+  .app-layout *,
+  .right-sidebar *,
+  .chat-panel *,
+  .activity-panel * {
+    max-width: 100%;
+  }
+
+  /* Remove clipping issues */
+  .main-container,
+  .content,
+  .sidebar,
+  .panel {
+    overflow: visible !important;
+    height: auto !important;
   }
 }
