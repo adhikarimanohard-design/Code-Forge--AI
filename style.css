@@ -1293,120 +1293,91 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
 }
 
 /* ============================================
-   MOBILE RESPONSIVE
+   MOBILE RESPONSIVE — FINAL
    ============================================ */
 @media (max-width: 768px) {
-
   .cursor, .cursor-trail { display: none; }
   body { cursor: auto; }
   button, input, select { cursor: auto; }
 
-  .topbar {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 8px 12px;
-    gap: 8px;
-  }
-
+  .topbar { flex-wrap: wrap; height: auto; padding: 8px 12px; gap: 8px; }
   .topbar-left { flex: 1; min-width: 0; }
   .topbar-center { order: 3; width: 100%; }
-  .topbar-right { gap: 6px; }
+  .topbar-right { flex: 0; gap: 6px; }
   .app-name { display: none; }
-
   .room-bar { width: 100%; justify-content: space-between; }
   #roomInput { width: 100%; flex: 1; }
+  .room-btn { padding: 5px 8px; font-size: 10px; }
+  .lang-select { font-size: 10px; padding: 4px 6px; }
+  #loggedInUser { max-width: 60px; font-size: 11px; }
+  .editor-statusbar { font-size: 9px; gap: 8px; padding: 0 8px; }
+  .editor-actions { display: none; }
+  .modal-box { width: 95vw; max-width: 400px; }
 
-  /* Stack layout vertically on mobile */
-  .app-layout { flex-direction: column; overflow-y: auto; }
+  .app-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    height: auto !important;
+  }
 
-  /* Editor full width, fixed height */
-  .editor-main { height: 55vh; min-height: 300px; }
-
-  /* Left sidebar — horizontal scroll on mobile */
   .sidebar-left {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    height: auto;
-    order: 2;
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    height: auto !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    overflow-x: auto !important;
+    order: 2 !important;
   }
 
   .sidebar-left .panel {
-    min-width: 260px;
-    border-bottom: none;
-    border-right: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  /* Right sidebar — hidden on mobile, show as bottom bar */
-  .sidebar-right {
-    width: 100%;
-    border-left: none;
-    border-top: 1px solid var(--border);
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    height: auto;
-    order: 3;
-  }
-
-  .sidebar-right .sidebar-section {
-    min-width: 200px;
-    border-bottom: none;
-    border-right: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  .sidebar-chat {
     min-width: 260px !important;
+    border-bottom: none !important;
+    border-right: 1px solid var(--border) !important;
+    flex-shrink: 0 !important;
   }
 
-  .editor-statusbar { font-size: 9px; gap: 8px; padding: 0 8px; }
-  .modal-box { width: 95vw; max-width: 400px; }
-  #loggedInUser { max-width: 60px; font-size: 11px; }
-  .lang-select { font-size: 10px; padding: 4px 6px; }
-  .topbar-right { flex: 0; }
-  .editor-actions { display: none; }
-  .room-btn { padding: 5px 8px; font-size: 10px; }
-}
+  .editor-main {
+    order: 1 !important;
+    height: 45vh !important;
+    width: 100% !important;
+  }
 
-/* Right sidebar needs flex column for proper layout */
-.sidebar-right {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-/* Force right sidebar visible */
-.sidebar-right {
-  display: flex !important;
-  flex-direction: column;
-  overflow-y: auto;
-}
-/* Always show chat on mobile */
-@media (max-width: 768px) {
   .sidebar-right {
+    display: flex !important;
     flex-direction: column !important;
+    width: 100% !important;
     height: auto !important;
-    overflow-y: visible !important;
+    border-left: none !important;
+    border-top: 1px solid var(--border) !important;
     overflow-x: hidden !important;
+    overflow-y: visible !important;
+    order: 3 !important;
   }
 
   .sidebar-right .sidebar-section {
-    min-width: unset !important;
     width: 100% !important;
+    min-width: unset !important;
     border-right: none !important;
     border-bottom: 1px solid var(--border) !important;
   }
 
   .sidebar-chat {
-    min-width: unset !important;
     width: 100% !important;
+    min-width: unset !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
-  .chat-messages {
-    max-height: 120px !important;
-  }
+  .chat-messages { max-height: 150px !important; }
+  .chat-input-bar { width: 100% !important; }
+}
+
+/* Desktop — right sidebar */
+.sidebar-right {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
