@@ -105,6 +105,7 @@
       <!-- SIDEBAR RIGHT -->
       <aside class="sidebar-right">
 
+        <!-- AI Panel -->
         <div class="panel" id="aiPanel">
           <div class="panel-header" onclick="togglePanel('aiPanel')">
             <span class="panel-icon">◎</span>
@@ -126,6 +127,7 @@
           </div>
         </div>
 
+        <!-- Terminal Panel -->
         <div class="panel" id="outputPanel">
           <div class="panel-header" onclick="togglePanel('outputPanel')">
             <span class="panel-icon">▶</span>
@@ -143,6 +145,7 @@
           </div>
         </div>
 
+        <!-- Room Info Panel -->
         <div class="panel" id="roomPanel">
           <div class="panel-header" onclick="togglePanel('roomPanel')">
             <span class="panel-icon">◉</span>
@@ -166,11 +169,31 @@
           </div>
         </div>
 
+        <!-- Chat Panel -->
+        <div class="panel" id="chatPanel">
+          <div class="panel-header" onclick="togglePanel('chatPanel')">
+            <span class="panel-icon">💬</span>
+            <span class="panel-title">ROOM CHAT</span>
+            <span class="panel-toggle">▾</span>
+          </div>
+          <div class="panel-body">
+            <div id="chatMessages" class="chat-messages"></div>
+            <div class="chat-input-bar">
+              <input
+                id="chatInput"
+                placeholder="Message..."
+                onkeydown="if(event.key==='Enter') sendChatMessage()"
+              />
+              <button class="chat-send-btn" onclick="sendChatMessage()">→</button>
+            </div>
+          </div>
+        </div>
+
       </aside>
     </div>
   </div>
 
-  <!-- AUTH MODAL — pops up only when joining room -->
+  <!-- AUTH MODAL -->
   <div id="authModal" class="modal-overlay" style="display:none">
     <div class="auth-box modal-box">
       <button class="modal-close" onclick="hideAuthModal()">✕</button>
@@ -259,9 +282,10 @@
   <script src="editor.js"></script>
   <script src="ai.js"></script>
 
-<!-- FOOTER -->
-<div class="footer">
-  Built with ⚡ by <a href="https://github.com/adhikarimanohard-design" target="_blank">Adhikari Manohar</a>
-</div>
+  <!-- FOOTER -->
+  <div class="footer">
+    Built with ⚡ by <a href="https://github.com/adhikarimanohard-design" target="_blank">Adhikari Manohar</a>
+  </div>
+
 </body>
 </html>
