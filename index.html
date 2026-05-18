@@ -17,7 +17,7 @@
   <!-- NOISE OVERLAY -->
   <div class="noise"></div>
 
-  <!-- MAIN APP — visible immediately -->
+  <!-- MAIN APP -->
   <div id="appScreen" class="app-screen">
 
     <!-- TOP BAR -->
@@ -66,6 +66,8 @@
 
       <!-- SIDEBAR LEFT -->
       <aside class="sidebar-left">
+
+        <!-- Online Users -->
         <div class="sidebar-section">
           <div class="section-header">
             <span class="section-title">ONLINE</span>
@@ -73,12 +75,31 @@
           </div>
           <ul id="userList" class="user-list"></ul>
         </div>
+
+        <!-- Activity -->
         <div class="sidebar-section">
           <div class="section-header">
             <span class="section-title">ACTIVITY</span>
           </div>
           <div id="activityLog" class="activity-log"></div>
         </div>
+
+        <!-- Chat -->
+        <div class="sidebar-section sidebar-chat">
+          <div class="section-header">
+            <span class="section-title">💬 CHAT</span>
+          </div>
+          <div id="chatMessages" class="chat-messages"></div>
+          <div class="chat-input-bar">
+            <input
+              id="chatInput"
+              placeholder="Message..."
+              onkeydown="if(event.key==='Enter') sendChatMessage()"
+            />
+            <button class="chat-send-btn" onclick="sendChatMessage()">→</button>
+          </div>
+        </div>
+
       </aside>
 
       <!-- EDITOR CENTER -->
@@ -166,26 +187,6 @@
               <span class="info-value" id="participantCount">0</span>
             </div>
             <button class="copy-room-btn" onclick="copyRoomId()">⎘ Copy Room ID</button>
-          </div>
-        </div>
-
-        <!-- Chat Panel -->
-        <div class="panel" id="chatPanel">
-          <div class="panel-header" onclick="togglePanel('chatPanel')">
-            <span class="panel-icon">💬</span>
-            <span class="panel-title">ROOM CHAT</span>
-            <span class="panel-toggle">▾</span>
-          </div>
-          <div class="panel-body">
-            <div id="chatMessages" class="chat-messages"></div>
-            <div class="chat-input-bar">
-              <input
-                id="chatInput"
-                placeholder="Message..."
-                onkeydown="if(event.key==='Enter') sendChatMessage()"
-              />
-              <button class="chat-send-btn" onclick="sendChatMessage()">→</button>
-            </div>
           </div>
         </div>
 
