@@ -1,5 +1,5 @@
 
-# 🚀 CodeCollab AI – Smart AI-Powered Cloud IDE
+# 🚀 CodeForge AI – Smart AI-Powered Cloud IDE
 
 A deployed full-stack AI-powered online IDE that allows developers to write, execute, and manage code in real time with AI assistance, authentication, and activity tracking.
 
