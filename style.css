@@ -1304,6 +1304,12 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
     height: auto !important;
   }
 
+  .editor-main {
+    order: 1 !important;
+    height: 45vh !important;
+    width: 100% !important;
+  }
+
   .sidebar-left {
     display: flex !important;
     flex-direction: row !important;
@@ -1312,6 +1318,7 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
     border-right: none !important;
     border-bottom: 1px solid var(--border) !important;
     overflow-x: auto !important;
+    overflow-y: hidden !important;
     order: 2 !important;
   }
 
@@ -1322,61 +1329,6 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
     flex-shrink: 0 !important;
   }
 
-  .editor-main {
-    order: 1 !important;
-    height: 45vh !important;
-    width: 100% !important;
-  }
-
-  /* RIGHT SIDEBAR — horizontal scroll */
-  .sidebar-right {
-    display: flex !important;
-    flex-direction: row !important;
-    width: 100% !important;
-    height: auto !important;
-    border-left: none !important;
-    border-top: 1px solid var(--border) !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    order: 3 !important;
-  }
-
-  .sidebar-right .panel {
-    min-width: 220px !important;
-    flex-shrink: 0 !important;
-    border-bottom: none !important;
-    border-right: 1px solid var(--border) !important;
-  }
-
-  .chat-messages { max-height: 150px !important; }
-  .chat-input-bar { width: 100% !important; }
-}
-
-/* Desktop — right sidebar */
-.sidebar-right {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-.sidebar-left {
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-chat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border-bottom: none !important;
-}
-
-.sidebar-chat .chat-messages {
-  flex: 1;
-  max-height: 180px;
-}
-
-/* Force right sidebar visible on mobile */
-@media (max-width: 768px) {
   .sidebar-right {
     display: flex !important;
     flex-direction: row !important;
@@ -1397,4 +1349,14 @@ body:has(button:hover) .cursor { width: 16px; height: 16px; }
     border-right: 1px solid var(--border) !important;
     display: block !important;
   }
+
+  .chat-messages { max-height: 120px !important; }
+  .chat-input-bar { width: 100% !important; }
+}
+
+/* Desktop */
+.sidebar-right {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
