@@ -39,7 +39,7 @@ Spring Boot REST API backend handling authentication, AI requests, and code exec
 
 # 🔢 Quantified Metrics
 
-Supports 5 programming languages (JS, Java, Python, C++, TS, Rust)
+Supports 6 programming languages (JS, Java, Python, C++, TS, Rust)
 
 AI assistant responds in <3s per query
 
