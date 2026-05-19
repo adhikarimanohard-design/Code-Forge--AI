@@ -37,7 +37,7 @@ Spring Boot REST API backend handling authentication, AI requests, and code exec
 
 ---
 
-🔢 Quantified Metrics
+# 🔢 Quantified Metrics
 
 Supports 5 programming languages (JS, Java, Python, C++, TS, Rust)
 
